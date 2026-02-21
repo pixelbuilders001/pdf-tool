@@ -1,6 +1,6 @@
 {
-  "name": "PDF Toolkit - Private & Offline",
-  "short_name": "PDF Toolkit",
+  "name": "Hellofixo - Private & Offline Tools",
+  "short_name": "Hellofixo",
   "description": "Fast, Private, Offline PDF Tools. Merge, Split, and Convert PDFs entirely in your browser.",
   "start_url": "/",
   "display": "standalone",

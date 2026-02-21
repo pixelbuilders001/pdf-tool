@@ -1,6 +1,6 @@
 export const SEO_CONFIG = {
-    title: 'PDF & Image Toolkit - Fast, Private, Offline Tools',
-    description: '100% client-side PDF and Image tools. Merge, split, compress, resize, and convert files without uploading them to any server. Your privacy is our priority.',
+    title: 'Hellofixo - Fast, Private, Offline PDF & Image Tools',
+    description: '100% client-side PDF and Image tools by Hellofixo. Merge, split, compress, resize, and convert files without uploading them to any server.',
     url: 'https://toolkit.example.com',
     keywords: [
         'merge pdf free',
