@@ -28,7 +28,7 @@ export default function UnlockPdfPage() {
         try {
             const arrayBuffer = await files[0].file.arrayBuffer();
             // Try to load with password
-            const pdfDoc = await PDFDocument.load(arrayBuffer, { password });
+            const pdfDoc = await PDFDocument.load(arrayBuffer, { password } as any);
 
             // Re-save without encryption
             const decryptedPdfBytes = await pdfDoc.save();
