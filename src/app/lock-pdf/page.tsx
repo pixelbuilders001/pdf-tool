@@ -32,7 +32,7 @@ export default function LockPdfPage() {
             // encryptPDF(pdfBytes, userPassword, ownerPassword)
             const encryptedPdfBytes = await encryptPDF(new Uint8Array(arrayBuffer), password, password);
 
-            const blob = new Blob([encryptedPdfBytes], { type: 'application/pdf' });
+            const blob = new Blob([encryptedPdfBytes as any], { type: 'application/pdf' });
             setResult({
                 url: URL.createObjectURL(blob),
                 blob,

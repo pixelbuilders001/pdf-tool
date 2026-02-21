@@ -33,7 +33,7 @@ export default function UnlockPdfPage() {
             // Re-save without encryption
             const decryptedPdfBytes = await pdfDoc.save();
 
-            const blob = new Blob([decryptedPdfBytes], { type: 'application/pdf' });
+            const blob = new Blob([decryptedPdfBytes as any], { type: 'application/pdf' });
             setResult({
                 url: URL.createObjectURL(blob),
                 blob,
