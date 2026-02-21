@@ -198,5 +198,13 @@ export const SEO_CONFIG = {
             icon: 'ShieldOff',
             category: 'advanced',
         },
+        {
+            id: 'internet-speed-test',
+            name: 'Internet Speed Test',
+            path: '/internet-speed-test',
+            description: 'Check your download, upload speed and latency instantly.',
+            icon: 'Wifi',
+            category: 'utility',
+        },
     ],
 };
