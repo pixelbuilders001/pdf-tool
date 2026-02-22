@@ -1,7 +1,7 @@
 'use client';
 
 import Link from 'next/link';
-import { Moon, Sun, FileText, User, LayoutGrid, ChevronDown, LucideIcon, X, Menu, Search, Briefcase, HelpCircle, ShieldCheck, Zap, ArrowRight } from 'lucide-react';
+import { Moon, Sun, FileText, User, LayoutGrid, ChevronDown, LucideIcon, X, Menu, Search, Briefcase, HelpCircle, ShieldCheck, Zap, ArrowRight, Calculator } from 'lucide-react';
 import { useEffect, useState, useRef } from 'react';
 import { motion, AnimatePresence } from 'framer-motion';
 import { SEO_CONFIG } from '@/seo/config';
@@ -37,7 +37,8 @@ export default function Header() {
         { id: 'pdf', name: 'PDF Tools', icon: FileText },
         { id: 'image', name: 'Image Tools', icon: Search },
         { id: 'utility', name: 'Utility Tools', icon: Briefcase },
-        { id: 'advanced', name: 'Advanced AI', icon: Zap }
+        { id: 'advanced', name: 'Advanced AI', icon: Zap },
+        { id: 'calculators', name: 'Calculators', icon: Calculator }
     ];
 
     return (
@@ -48,7 +49,7 @@ export default function Header() {
                     <div className="w-10 h-10 bg-primary/10 rounded-xl flex items-center justify-center group-hover:bg-primary transition-all duration-300">
                         <FileText className="w-6 h-6 text-primary group-hover:text-white transition-colors" />
                     </div>
-                    <span className="hidden sm:inline-block">Hellofixo</span>
+                    <span className="hidden sm:inline-block">PDF Toolkit</span>
                 </Link>
 
                 {/* Desktop Navigation */}
@@ -77,7 +78,7 @@ export default function Header() {
                                     className="fixed top-20 left-0 w-full bg-card border-b border-border shadow-2xl overflow-hidden z-[60]"
                                 >
                                     <div className="container mx-auto px-4 py-12">
-                                        <div className="grid grid-cols-4 gap-12">
+                                        <div className="grid grid-cols-2 lg:grid-cols-5 gap-8 lg:gap-12">
                                             {categories.map((cat) => (
                                                 <div key={cat.id} className="space-y-6">
                                                     <div className="flex items-center gap-2">
@@ -159,14 +160,6 @@ export default function Header() {
                         {isDark ? <Sun className="w-5 h-5" /> : <Moon className="w-5 h-5" />}
                     </button>
 
-                    <Link href="#" className="hidden sm:flex px-5 py-2.5 text-[15px] font-bold text-foreground hover:bg-secondary rounded-xl transition-all active:scale-95">
-                        Login
-                    </Link>
-
-                    <button className="hidden sm:flex p-2.5 bg-primary/10 text-primary rounded-xl hover:bg-primary/20 transition-all active:scale-95">
-                        <User className="w-6 h-6" />
-                    </button>
-
                     <button
                         className="lg:hidden p-2.5 rounded-xl bg-secondary text-foreground active:scale-95"
                         onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
@@ -217,9 +210,6 @@ export default function Header() {
                                 <div className="pt-8 space-y-3">
                                     <Link href="#" className="px-4 py-4 text-xl font-bold flex items-center justify-between border-t border-border pt-8" onClick={() => setIsMobileMenuOpen(false)}>Pricing</Link>
                                     <Link href="#" className="px-4 py-4 text-xl font-bold flex items-center justify-between" onClick={() => setIsMobileMenuOpen(false)}>Support</Link>
-                                    <button className="w-full bg-primary text-white py-4 rounded-2xl font-black text-xl shadow-xl shadow-primary/20 active:scale-[0.98] transition-all">
-                                        Sign In
-                                    </button>
                                 </div>
                             </nav>
                         </div>

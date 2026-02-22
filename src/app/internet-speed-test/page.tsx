@@ -1,8 +1,8 @@
 "use client"
 
-import React, { useEffect, useState } from 'react';
-import { motion, AnimatePresence } from 'framer-motion';
-import { Wifi, ArrowDown, ArrowUp, Activity, Play, Square, RefreshCw } from 'lucide-react';
+import React, { useEffect, useState, useRef } from 'react';
+import { motion, AnimatePresence, useScroll, useTransform } from 'framer-motion';
+import { Wifi, ArrowDown, ArrowUp, Activity, Play, Square, ChevronDown, Monitor, MapPin, Server } from 'lucide-react';
 import { useSpeedTest } from '@/hooks/useSpeedTest';
 import { clsx } from 'clsx';
 import { twMerge } from 'tailwind-merge';
@@ -19,7 +19,6 @@ export default function InternetSpeedTest() {
     useEffect(() => {
         if (status === 'downloading' || status === 'uploading') {
             const targetSpeed = results.download || results.upload || 0;
-            // Just a simple smoothing for the UI
             setCurrentSpeed(prev => prev + (targetSpeed - prev) * 0.1);
         } else if (status === 'complete') {
             setCurrentSpeed(results.download || 0);
@@ -37,61 +36,47 @@ export default function InternetSpeedTest() {
     };
 
     return (
-        <div className="min-h-screen bg-[#0a0a0b] text-white p-6 md:p-12 font-sans overflow-hidden">
-            <div className="max-w-4xl mx-auto space-y-12">
-                {/* Header */}
-                <div className="text-center space-y-4">
-                    <motion.div
-                        initial={{ opacity: 0, y: -20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="inline-flex items-center gap-2 px-4 py-2 rounded-full bg-white/5 border border-white/10 text-blue-400 text-sm font-medium"
-                    >
-                        <Wifi className="w-4 h-4" />
-                        <span>Network Diagnostic Tool</span>
-                    </motion.div>
-                    <motion.h1
-                        initial={{ opacity: 0, y: -10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        transition={{ delay: 0.1 }}
-                        className="text-5xl md:text-6xl font-bold tracking-tight bg-gradient-to-r from-white via-white to-white/50 bg-clip-text text-transparent"
-                    >
-                        Internet Speed Test
-                    </motion.h1>
-                    <motion.p
-                        initial={{ opacity: 0 }}
-                        animate={{ opacity: 1 }}
-                        transition={{ delay: 0.2 }}
-                        className="text-gray-400 text-lg max-w-xl mx-auto"
-                    >
-                        Get accurate insights into your upload, download, and connection stability in seconds.
-                    </motion.p>
-                </div>
+        <div className="min-h-screen bg-background text-foreground font-sans selection:bg-primary/20">
 
-                {/* Speedometer Area */}
-                <div className="relative flex flex-col items-center">
-                    <div className="relative w-72 h-72 md:w-96 md:h-96">
-                        {/* Background Circle */}
+
+            {/* Speedometer Section */}
+            <section className="py-8 px-6 flex flex-col items-center border-y border-border/40 bg-secondary/10">
+                <div className="max-w-4xl mx-auto flex flex-col items-center">
+                    <div className="relative w-80 h-80 md:w-[450px] md:h-[450px]">
+                        {/* Background Dial */}
                         <svg className="w-full h-full -rotate-90 transform">
                             <circle
                                 cx="50%"
                                 cy="50%"
-                                r="45%"
-                                className="stroke-white/5 fill-none"
-                                strokeWidth="8"
+                                r="42%"
+                                className="stroke-muted fill-none"
+                                strokeWidth="12"
+                                strokeDasharray="264%"
+                                strokeDashoffset="0"
                             />
+                            {/* Static notches */}
+                            {[...Array(20)].map((_, i) => (
+                                <line
+                                    key={i}
+                                    x1="50%" y1="8%" x2="50%" y2="12%"
+                                    className="stroke-muted-foreground/30"
+                                    strokeWidth="2"
+                                    transform={`rotate(${i * 18} ${450 / 2} ${450 / 2})`}
+                                />
+                            ))}
                             {/* Progress Arc */}
                             <motion.circle
                                 cx="50%"
                                 cy="50%"
-                                r="45%"
+                                r="42%"
                                 className={cn(
-                                    "fill-none transition-colors duration-1000",
-                                    status === 'downloading' ? "stroke-blue-500" :
-                                        status === 'uploading' ? "stroke-emerald-500" : "stroke-white/10"
+                                    "fill-none transition-colors duration-700",
+                                    status === 'downloading' ? "stroke-primary" :
+                                        status === 'uploading' ? "stroke-emerald-500" : "stroke-muted"
                                 )}
-                                strokeWidth="8"
-                                strokeDasharray="282%"
-                                strokeDashoffset={`${282 - (progress * 2.82)}%`}
+                                strokeWidth="12"
+                                strokeDasharray="264%"
+                                strokeDashoffset={`${264 - (progress * 2.64)}%`}
                                 strokeLinecap="round"
                             />
                         </svg>
@@ -101,136 +86,197 @@ export default function InternetSpeedTest() {
                             <AnimatePresence mode="wait">
                                 <motion.div
                                     key={status}
-                                    initial={{ opacity: 0, scale: 0.9 }}
+                                    initial={{ opacity: 0, scale: 0.95 }}
                                     animate={{ opacity: 1, scale: 1 }}
-                                    exit={{ opacity: 0, scale: 0.9 }}
-                                    className="space-y-1"
+                                    exit={{ opacity: 0, scale: 0.95 }}
+                                    className="space-y-0"
                                 >
-                                    <span className="text-7xl md:text-8xl font-black tabular-nums tracking-tighter">
+                                    <span className="text-8xl md:text-[120px] font-black tabular-nums tracking-tighter text-foreground leading-none">
                                         {status === 'idle' ? '0' : Math.floor(currentSpeed)}
                                     </span>
-                                    <div className="text-xl md:text-2xl font-medium text-gray-500 tracking-widest uppercase">
+                                    <div className="text-2xl md:text-3xl font-bold text-muted-foreground tracking-widest uppercase pb-2">
                                         Mbps
                                     </div>
                                 </motion.div>
                             </AnimatePresence>
 
-                            <div className="mt-4 flex items-center gap-2 px-3 py-1 rounded-full bg-white/5 text-xs font-mono text-gray-400">
-                                {status === 'idle' && "READY TO TEST"}
-                                {status === 'pinging' && "MEASURING LATENCY..."}
-                                {status === 'downloading' && "TESTING DOWNLOAD..."}
-                                {status === 'uploading' && "TESTING UPLOAD..."}
-                                {status === 'complete' && "TEST COMPLETE"}
+                            <div className="flex items-center gap-2 px-4 py-1.5 rounded-full bg-primary/10 text-primary text-[11px] font-bold tracking-widest uppercase">
+                                {status === 'idle' && "STANDBY"}
+                                {status === 'pinging' && "PINGING..."}
+                                {status === 'downloading' && "DOWNLOADING"}
+                                {status === 'uploading' && "UPLOADING"}
+                                {status === 'complete' && "FINISH"}
+                                {status === 'error' && "ERROR"}
                             </div>
                         </div>
                     </div>
 
-                    {/* Controls */}
-                    <div className="mt-8">
-                        {status === 'idle' || status === 'complete' || status === 'error' ? (
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={startTest}
-                                className="group relative flex items-center gap-3 px-10 py-5 rounded-2xl bg-white text-black font-bold text-xl overflow-hidden shadow-[0_0_40px_rgba(255,255,255,0.2)] transition-shadow hover:shadow-[0_0_60px_rgba(255,255,255,0.4)]"
-                            >
-                                <Play className="w-6 h-6 fill-current" />
-                                <span>{status === 'complete' ? 'Test Again' : 'Start Test'}</span>
-                            </motion.button>
-                        ) : (
-                            <motion.button
-                                whileHover={{ scale: 1.05 }}
-                                whileTap={{ scale: 0.95 }}
-                                onClick={stopTest}
-                                className="flex items-center gap-3 px-10 py-5 rounded-2xl bg-red-500/10 border border-red-500/20 text-red-500 font-bold text-xl"
-                            >
-                                <Square className="w-6 h-6 fill-current" />
-                                <span>Stop Test</span>
-                            </motion.button>
-                        )}
-                    </div>
-                </div>
 
-                {/* Results Grid */}
-                <div className="grid grid-cols-1 md:grid-cols-3 gap-6">
-                    <ResultCard
-                        label="Ping"
+                </div>
+                <div className="flex justify-center gap-4">
+                    {status === 'idle' || status === 'complete' || status === 'error' ? (
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={startTest}
+                            className="btn-primary flex items-center gap-2 text-sm py-3 px-8 shadow-lg shadow-primary/20"
+                        >
+                            <Play className="w-4 h-4 fill-current" />
+                            <span>{status === 'complete' ? 'Run Again' : 'Start Speed Test'}</span>
+                        </motion.button>
+                    ) : (
+                        <motion.button
+                            whileHover={{ scale: 1.02 }}
+                            whileTap={{ scale: 0.98 }}
+                            onClick={stopTest}
+                            className="px-8 py-3 rounded-xl bg-destructive/10 border border-destructive/30 text-destructive font-bold text-sm flex items-center gap-2"
+                        >
+                            <Square className="w-4 h-4 fill-current" />
+                            <span>Stop Test</span>
+                        </motion.button>
+                    )}
+                </div>
+            </section>
+
+            {/* Detailed Results Section */}
+            <section className="py-10 px-6 container mx-auto">
+
+                <div className="grid grid-cols-1 md:grid-cols-3 gap-8 mb-20">
+                    <DetailedResultCard
+                        label="Latency"
                         value={results.ping ? `${Math.round(results.ping)} ms` : '--'}
-                        icon={<Activity className="w-5 h-5 text-amber-500" />}
+                        icon={<Activity className="w-6 h-6" />}
+                        description="Time taken for a small packet of data to travel to the server and back."
+                        color="amber"
                         active={status === 'pinging'}
                     />
-                    <ResultCard
-                        label="Download"
+                    <DetailedResultCard
+                        label="Download Speed"
                         value={results.download ? `${results.download.toFixed(1)} Mbps` : '--'}
-                        icon={<ArrowDown className="w-5 h-5 text-blue-500" />}
+                        icon={<ArrowDown className="w-6 h-6" />}
+                        description="The speed at which data is transferred from the internet to your device."
+                        color="blue"
                         active={status === 'downloading'}
                     />
-                    <ResultCard
-                        label="Upload"
+                    <DetailedResultCard
+                        label="Upload Speed"
                         value={results.upload ? `${results.upload.toFixed(1)} Mbps` : '--'}
-                        icon={<ArrowUp className="w-5 h-5 text-emerald-500" />}
+                        icon={<ArrowUp className="w-6 h-6" />}
+                        description="The speed at which data is sent from your device to the internet."
+                        color="emerald"
                         active={status === 'uploading'}
                     />
                 </div>
 
-                {/* ISP & Location Info */}
-                {(results.isp || results.location) && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 10 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="flex flex-wrap justify-center gap-8 py-6 px-8 rounded-3xl bg-white/[0.02] border border-white/5"
-                    >
-                        <div className="flex items-center gap-3">
-                            <span className="text-gray-500 text-sm uppercase tracking-wider font-semibold">Operator</span>
-                            <span className="text-white font-medium">{results.isp || 'Searching...'}</span>
-                        </div>
-                        <div className="w-px h-6 bg-white/10 hidden md:block" />
-                        <div className="flex items-center gap-3">
-                            <span className="text-gray-500 text-sm uppercase tracking-wider font-semibold">Server</span>
-                            <span className="text-white font-medium">{results.location || 'Locating...'}</span>
-                        </div>
-                    </motion.div>
-                )}
+                {/* Rating Banner */}
+                <AnimatePresence>
+                    {status === 'complete' && results.download && (
+                        <motion.div
+                            initial={{ opacity: 0, y: 30 }}
+                            animate={{ opacity: 1, y: 0 }}
+                            className="p-10 rounded-[2rem] glass border border-primary/20 bg-primary/[0.03] text-center space-y-4 shadow-2xl shadow-primary/5"
+                        >
+                            <div className="w-16 h-16 bg-primary rounded-2xl flex items-center justify-center mx-auto mb-2 shadow-lg shadow-primary/20 rotate-3 group-hover:rotate-0 transition-transform">
+                                <Wifi className="w-8 h-8 text-white" />
+                            </div>
+                            <h3 className="text-muted-foreground font-bold uppercase tracking-[0.2em] text-xs">Connection Quality</h3>
+                            <p className="text-3xl md:text-4xl font-extrabold text-foreground">
+                                {getRecommendation(results.download)}
+                            </p>
+                        </motion.div>
+                    )}
+                </AnimatePresence>
+            </section>
 
-                {/* Recommendations */}
-                {status === 'complete' && results.download && (
-                    <motion.div
-                        initial={{ opacity: 0, y: 20 }}
-                        animate={{ opacity: 1, y: 0 }}
-                        className="p-8 rounded-3xl bg-white/[0.03] border border-white/10 text-center"
-                    >
-                        <h3 className="text-white/60 text-sm font-medium uppercase tracking-widest mb-2">Connection Rating</h3>
-                        <p className="text-2xl font-semibold text-blue-400">
-                            {getRecommendation(results.download)}
-                        </p>
-                    </motion.div>
-                )}
-            </div>
+            {/* Network Provider Details */}
+            <section className="pb-32 px-6">
+                <div className="max-w-4xl mx-auto rounded-[2.5rem] bg-card border border-border/80 p-8 md:p-12 shadow-sm">
+                    <div className="grid grid-cols-1 md:grid-cols-2 gap-12">
+                        <div className="space-y-6">
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 rounded-2xl bg-secondary flex items-center justify-center">
+                                    <Server className="w-6 h-6 text-primary" />
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Service Provider</h4>
+                                    <p className="text-xl font-bold text-foreground mt-1">{results.isp || (status === 'idle' ? 'Ready to analyze' : 'Searching...')}</p>
+                                </div>
+                            </div>
+                            <div className="flex items-center gap-4">
+                                <div className="p-3 rounded-2xl bg-secondary flex items-center justify-center">
+                                    <MapPin className="w-6 h-6 text-emerald-500" />
+                                </div>
+                                <div>
+                                    <h4 className="text-sm font-bold text-muted-foreground uppercase tracking-widest">Server Location</h4>
+                                    <p className="text-xl font-bold text-foreground mt-1">{results.location || (status === 'idle' ? 'Pending test' : 'Locating...')}</p>
+                                </div>
+                            </div>
+                        </div>
+
+                        <div className="bg-secondary/50 rounded-3xl p-6 border border-border/40 flex flex-col justify-center">
+                            <p className="text-sm text-muted-foreground leading-relaxed">
+                                Our speed test uses high-performance nodes to ensure maximum accuracy.
+                                <br /><br />
+                                <span className="text-xs font-medium">Measurement conducted via secure XHR protocols.</span>
+                            </p>
+                            <div className="mt-6 flex gap-2">
+                                <span className="px-2 py-1 rounded bg-green-500/10 text-green-600 text-[10px] font-bold uppercase tracking-tighter">Safe</span>
+                                <span className="px-2 py-1 rounded bg-blue-500/10 text-blue-600 text-[10px] font-bold uppercase tracking-tighter">Private</span>
+                                <span className="px-2 py-1 rounded bg-amber-500/10 text-amber-600 text-[10px] font-bold uppercase tracking-tighter">Verified</span>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </section>
+
+            {/* Footer space */}
+            <footer className="py-12 border-t border-border/40 text-center">
+                <p className="text-muted-foreground text-sm">Powered by Cloudflare Infrastructure & libtoolkit</p>
+            </footer>
         </div>
     );
 }
 
-function ResultCard({ label, value, icon, active }: { label: string, value: string, icon: React.ReactNode, active: boolean }) {
+function DetailedResultCard({ label, value, icon, description, color, active }: any) {
+    const colorClasses: any = {
+        amber: "text-amber-500 bg-amber-500/10",
+        blue: "text-blue-500 bg-blue-500/10",
+        emerald: "text-emerald-500 bg-emerald-500/10"
+    };
+
     return (
         <div className={cn(
-            "relative p-6 rounded-3xl bg-white/[0.03] border border-white/10 transition-all duration-500",
-            active && "bg-white/[0.08] border-white/20 ring-1 ring-white/20 scale-[1.02]"
+            "p-8 rounded-[2rem] bg-card border border-border/60 transition-all duration-500 relative overflow-hidden",
+            active && "ring-2 ring-primary border-transparent shadow-2xl shadow-primary/10"
         )}>
-            <div className="flex items-center gap-3 mb-4">
-                <div className="p-2 rounded-xl bg-white/5 border border-white/10">
-                    {icon}
-                </div>
-                <span className="text-gray-400 font-medium">{label}</span>
-            </div>
-            <div className="text-3xl font-bold tabular-nums">
-                {value}
-            </div>
             {active && (
                 <motion.div
-                    layoutId="active-glow"
-                    className="absolute inset-0 rounded-3xl bg-blue-500/5 blur-xl pointer-events-none"
+                    initial={{ x: '-100%' }}
+                    animate={{ x: '100%' }}
+                    transition={{ repeat: Infinity, duration: 1.5, ease: 'linear' }}
+                    className="absolute top-0 left-0 w-full h-[2px] bg-gradient-to-r from-transparent via-primary to-transparent"
                 />
             )}
+
+            <div className="flex justify-between items-start mb-6">
+                <div className={cn("p-4 rounded-2xl flex items-center justify-center", colorClasses[color])}>
+                    {icon}
+                </div>
+                {active && (
+                    <span className="text-[10px] font-bold text-primary animate-pulse tracking-widest uppercase">Measuring</span>
+                )}
+            </div>
+
+            <div className="space-y-1 mb-4">
+                <h4 className="text-muted-foreground font-bold tracking-widest text-[11px] uppercase">{label}</h4>
+                <div className="text-4xl font-extrabold text-foreground tracking-tight tabular-nums">
+                    {value}
+                </div>
+            </div>
+
+            <p className="text-muted-foreground/70 text-sm leading-relaxed border-t border-border/40 pt-4 mt-4">
+                {description}
+            </p>
         </div>
     );
 }

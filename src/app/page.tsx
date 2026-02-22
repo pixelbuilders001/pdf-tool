@@ -10,7 +10,8 @@ export default function Home() {
   const categories = [
     { id: 'pdf', name: 'PDF Tools' },
     { id: 'image', name: 'Image Tools' },
-    { id: 'utility', name: 'Utility Tools' }
+    { id: 'utility', name: 'Utility Tools' },
+    { id: 'calculators', name: 'Financial & Health Calculators' }
   ];
 
   return (
@@ -86,7 +87,6 @@ export default function Home() {
               <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-6">
                 {SEO_CONFIG.tools
                   .filter(t => t.category === category.id || (category.id === 'utility' && (t.category === 'utility' || t.category === 'advanced' || t.category === 'security')))
-                  .slice(0, 8)
                   .map((tool, idx) => (
                     <ToolCard key={tool.id} {...tool} />
                   ))}
@@ -129,7 +129,7 @@ export default function Home() {
         <div className="container mx-auto px-4">
           <div className="max-w-4xl mx-auto space-y-12">
             <div className="space-y-6 text-center md:text-left">
-              <h2 className="text-4xl font-extrabold">Why Use Hellofixo Offline?</h2>
+              <h2 className="text-4xl font-extrabold">Why Use PDF Toolkit Offline?</h2>
               <p className="text-xl text-gray-400 leading-relaxed">
                 Most online editors upload your sensitive files. We don't. Our toolkit uses cutting-edge
                 browser technology to process everything on your computer, making it faster and 100% private.

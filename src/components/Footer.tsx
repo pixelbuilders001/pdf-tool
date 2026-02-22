@@ -9,16 +9,13 @@ export default function Footer() {
                     <div className="col-span-1 md:col-span-1 space-y-6">
                         <Link href="/" className="flex items-center gap-2 font-bold text-xl tracking-tight text-white">
                             <FileText className="w-8 h-8 text-primary" />
-                            <span>Hellofixo</span>
+                            <span>PDF Toolkit</span>
                         </Link>
                         <p className="text-sm leading-relaxed max-w-xs">
                             Fast, Private, Offline. Professional PDF tools that run 100% in your browser using the latest WebAssembly technology.
                         </p>
                         <div className="space-y-3 text-sm">
-                            <div className="flex items-center gap-2">
-                                <MapPin className="w-4 h-4 text-primary" />
-                                <span>123 Tech Avenue, Silicon Valley, CA</span>
-                            </div>
+
                             <div className="flex items-center gap-2">
                                 <Mail className="w-4 h-4 text-primary" />
                                 <span>support@pdftoolkit.com</span>
@@ -30,7 +27,7 @@ export default function Footer() {
                         <h4 className="font-bold text-white mb-6 uppercase text-xs tracking-widest">Company</h4>
                         <ul className="space-y-4 text-sm">
                             <li><Link href="/" className="hover:text-primary transition-colors">About Us</Link></li>
-                            <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li>
+                            {/* <li><Link href="#" className="hover:text-primary transition-colors">Careers</Link></li> */}
                             <li><Link href="#" className="hover:text-primary transition-colors">Privacy Policy</Link></li>
                             <li><Link href="#" className="hover:text-primary transition-colors">Terms of Service</Link></li>
                         </ul>
@@ -57,7 +54,7 @@ export default function Footer() {
                             </a>
                         </div>
                         <p className="text-xs">
-                            &copy; {new Date().getFullYear()} Hellofixo. Built with ❤️ for privacy and security.
+                            &copy; {new Date().getFullYear()} PDF Toolkit. Built with ❤️ for privacy and security.
                         </p>
                     </div>
                 </div>

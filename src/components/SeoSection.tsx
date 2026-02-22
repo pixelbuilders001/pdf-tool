@@ -17,7 +17,7 @@ export default function SeoSection({ toolId }: SeoSectionProps) {
                     <section>
                         <h3 className="text-xl font-bold text-foreground mb-4">Why our {tool.name.toLowerCase()} tool is different</h3>
                         <p>
-                            Most online PDF editors require you to upload your files to their remote servers. This poses a significant security risk, especially when dealing with legal contracts, financial statements, or private identification documents. Our <strong>Hellofixo</strong> tools use cutting-edge browser technologies like <strong>WebAssembly</strong> and <strong>pdf-lib</strong> to process your files directly on your own computer.
+                            Most online PDF editors require you to upload your files to their remote servers. This poses a significant security risk, especially when dealing with legal contracts, financial statements, or private identification documents. Our <strong>PDF Toolkit</strong> tools use cutting-edge browser technologies like <strong>WebAssembly</strong> and <strong>pdf-lib</strong> to process your files directly on your own computer.
                         </p>
                     </section>
 
