@@ -17,7 +17,30 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-
+      <section className="container mx-auto px-4 pt-10 pb-6 md:pt-12 md:pb-8">
+        <div className="max-w-3xl mx-auto text-center space-y-6">
+          <motion.div
+            initial={{ opacity: 0, y: 20 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 0.6 }}
+            className="space-y-6"
+          >
+            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
+              Powerful PDF & <span className="text-primary">Image Tools</span>
+              Done Right
+            </h1>
+            <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed">
+              Unlock your productivity with professional-grade tools.
+              Process everything 100% locally in your browser for total privacy and speed.
+            </p>
+            <div className="flex flex-wrap gap-4 justify-center pt-2">
+              <button className="px-8 py-3.5 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2 active:scale-95">
+                Explore All Tools <ArrowRight className="w-5 h-5" />
+              </button>
+            </div>
+          </motion.div>
+        </div>
+      </section>
 
       {/* Tools Sections */}
       <section className="bg-secondary/30 py-24">
@@ -106,11 +129,7 @@ export default function Home() {
               </div>
             </div>
 
-            <div className="flex justify-center md:justify-end pt-8">
-              <button className="px-10 py-4 bg-primary rounded-xl font-bold hover:bg-primary/90 transition-all">
-                Subscribe
-              </button>
-            </div>
+
           </div>
         </div>
       </section>
