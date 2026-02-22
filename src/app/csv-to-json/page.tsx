@@ -35,7 +35,7 @@ export default function CsvToJsonPage() {
                     const jsonString = JSON.stringify(results.data, null, 4);
                     setResult(jsonString);
                 },
-                error: (err) => {
+                error: (err: any) => {
                     setError(err.message || 'Error parsing CSV.');
                 }
             });

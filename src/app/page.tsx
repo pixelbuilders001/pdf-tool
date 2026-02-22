@@ -17,60 +17,7 @@ export default function Home() {
   return (
     <div className="flex flex-col min-h-screen">
       {/* Hero Section */}
-      <section className="container mx-auto px-4 pt-10 pb-10 md:pt-10 md:pb-4">
-        <div className="grid grid-cols-1 lg:grid-cols-2 gap-12 items-center">
-          <motion.div
-            initial={{ opacity: 0, x: -20 }}
-            animate={{ opacity: 1, x: 0 }}
-            transition={{ duration: 0.6 }}
-            className="space-y-8"
-          >
-            <h1 className="text-5xl md:text-7xl font-extrabold tracking-tight text-foreground leading-[1.1]">
-              Powerful PDF & <br />
-              <span className="text-primary">Image Editing </span> <br />
-              Made Simple
-            </h1>
-            <p className="text-xl text-muted-foreground/80 max-w-xl leading-relaxed">
-              Unlock your productivity with easy to use PDF and image tools.
-              Process everything locally in your browser for total privacy.
-            </p>
-            <div className="flex flex-wrap gap-4 pt-4">
-              <button className="px-8 py-4 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2">
-                Get Started Free <ArrowRight className="w-5 h-5" />
-              </button>
 
-            </div>
-          </motion.div>
-
-          <motion.div
-            initial={{ opacity: 0, scale: 0.9 }}
-            animate={{ opacity: 1, scale: 1 }}
-            transition={{ duration: 0.8, delay: 0.2 }}
-            className="relative hidden lg:block"
-          >
-            <div className="relative w-full aspect-square max-w-[500px] mx-auto group">
-              {/* Decorative Glow */}
-              <div className="absolute inset-0 bg-primary/20 blur-[100px] rounded-full group-hover:bg-primary/30 transition-all duration-500" />
-
-              <div className="relative z-10 w-full h-full flex items-center justify-center p-8">
-                <img
-                  src="/hero-illustration.png"
-                  alt="Hellofixo Hero Illustration"
-                  className="w-full h-full object-contain drop-shadow-2xl group-hover:scale-105 transition-transform duration-700 ease-out"
-                />
-              </div>
-
-              {/* Small floating elements for added depth */}
-              <div className="absolute top-20 right-10 p-3 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 transform rotate-12 group-hover:rotate-0 transition-all duration-700">
-                <Shield className="w-8 h-8 text-primary" />
-              </div>
-              <div className="absolute bottom-20 left-10 p-4 bg-white/80 backdrop-blur-md rounded-2xl shadow-xl border border-white/20 transform -rotate-12 group-hover:rotate-0 transition-all duration-700">
-                <Lock className="w-10 h-10 text-emerald-500" />
-              </div>
-            </div>
-          </motion.div>
-        </div>
-      </section>
 
       {/* Tools Sections */}
       <section className="bg-secondary/30 py-24">
