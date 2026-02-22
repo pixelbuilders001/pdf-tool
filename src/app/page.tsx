@@ -25,11 +25,11 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <h1 className="text-4xl md:text-4xl font-extrabold tracking-tight text-foreground leading-tight">
+            <h1 className="text-2xl md:text-4xl font-extrabold tracking-tight text-foreground leading-tight">
               Powerful PDF & <span className="text-primary mr-2">Image Tools</span>
               Done Right
             </h1>
-            <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed">
+            <p className="text-md text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Unlock your productivity with professional-grade tools.
               Process everything 100% locally in your browser for total privacy and speed.
             </p>
