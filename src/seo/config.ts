@@ -77,14 +77,14 @@ export const SEO_CONFIG = {
             icon: 'Lock',
             category: 'security',
         },
-        {
-            id: 'unlock-pdf',
-            name: 'Unlock PDF',
-            path: '/unlock-pdf',
-            description: 'Remove password protection from encrypted PDFs.',
-            icon: 'Unlock',
-            category: 'security',
-        },
+        // {
+        //     id: 'unlock-pdf',
+        //     name: 'Unlock PDF',
+        //     path: '/unlock-pdf',
+        //     description: 'Remove password protection from encrypted PDFs.',
+        //     icon: 'Unlock',
+        //     category: 'security',
+        // },
         // Image Tools
         {
             id: 'compress-image',

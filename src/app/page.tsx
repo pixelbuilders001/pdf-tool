@@ -8,7 +8,7 @@ import Link from 'next/link';
 
 export default function Home() {
   const categories = [
-    { id: 'pdf', name: 'PDF Tools' },
+    { id: 'pdf', name: null },
     { id: 'image', name: 'Image Tools' },
     { id: 'utility', name: 'Utility Tools' },
     { id: 'calculators', name: 'Financial & Health Calculators' }
@@ -25,25 +25,25 @@ export default function Home() {
             transition={{ duration: 0.6 }}
             className="space-y-6"
           >
-            <h1 className="text-4xl md:text-6xl font-extrabold tracking-tight text-foreground leading-tight">
-              Powerful PDF & <span className="text-primary">Image Tools</span>
+            <h1 className="text-4xl md:text-4xl font-extrabold tracking-tight text-foreground leading-tight">
+              Powerful PDF & <span className="text-primary mr-2">Image Tools</span>
               Done Right
             </h1>
             <p className="text-lg text-muted-foreground/80 max-w-2xl mx-auto leading-relaxed">
               Unlock your productivity with professional-grade tools.
               Process everything 100% locally in your browser for total privacy and speed.
             </p>
-            <div className="flex flex-wrap gap-4 justify-center pt-2">
+            {/* <div className="flex flex-wrap gap-4 justify-center pt-2">
               <button className="px-8 py-3.5 bg-primary text-white rounded-xl font-bold text-lg hover:bg-primary/90 transition-all shadow-lg shadow-primary/20 flex items-center gap-2 active:scale-95">
                 Explore All Tools <ArrowRight className="w-5 h-5" />
               </button>
-            </div>
+            </div> */}
           </motion.div>
         </div>
       </section>
 
       {/* Tools Sections */}
-      <section className="bg-secondary/30 py-24">
+      <section className="bg-secondary/30 pb-24 pt-4">
         <div className="container mx-auto px-4 space-y-24">
           {categories.map((category) => (
             <div key={category.id} className="space-y-10">
