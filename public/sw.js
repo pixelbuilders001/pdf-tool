@@ -1,46 +1,10 @@
-const CACHE_NAME = 'pdf-toolkit-v2';
-const PRECACHE_ASSETS = [
-    '/',
-    '/manifest.json',
-    '/icons/icon-192x192.png',
-    '/icons/icon-512x512.png',
-];
-
-// Precache on install
-self.addEventListener('install', (event) => {
-    event.waitUntil(
-        caches.open(CACHE_NAME)
-            .then((cache) => cache.addAll(PRECACHE_ASSETS))
-            .then(() => self.skipWaiting())
-    );
-});
-
-// Activate and clean old caches
-self.addEventListener('activate', (event) => {
-    event.waitUntil(
-        caches.keys().then((cacheNames) =>
-            Promise.all(
-                cacheNames
-                    .filter((name) => name !== CACHE_NAME)
-                    .map((name) => caches.delete(name))
-            )
-        ).then(() => self.clients.claim())
-    );
-});
-
-// Network-first fetch strategy
-self.addEventListener('fetch', (event) => {
-    if (event.request.method !== 'GET') return;
-
-    event.respondWith(
-        fetch(event.request)
-            .then((response) => {
-                if (response && response.status === 200) {
-                    const cloned = response.clone();
-                    caches.open(CACHE_NAME).then((cache) => cache.put(event.request, cloned));
-                }
-                return response;
-            })
-            .catch(() => caches.match(event.request))
-    );
-});
+/**
+ * DEV PLACEHOLDER — This file is overwritten by `generate-sw.mjs`
+ * after `next build` with a full Workbox service worker.
+ *
+ * In development, this minimal SW is used (no offline support).
+ * Run `npm run build` to get the production SW with full offline support.
+ */
+self.addEventListener('install', () => self.skipWaiting());
+self.addEventListener('activate', () => self.clients.claim());
+self.addEventListener('fetch', () => { });
