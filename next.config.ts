@@ -1,4 +1,14 @@
 import type { NextConfig } from "next";
+import withPWAInit from "@ducanh2912/next-pwa";
+
+const withPWA = withPWAInit({
+  dest: "public",
+  disable: false,
+  register: true,
+});
+
+
+
 
 const nextConfig: NextConfig = {
   /* config options here */
@@ -6,8 +16,10 @@ const nextConfig: NextConfig = {
   images: {
     unoptimized: true,
   },
-  // Setting an empty turbopack config to silence the error if needed, 
-  // or just removing the webpack config entirely.
+  turbopack: {},
 };
 
-export default nextConfig;
+
+
+export default withPWA(nextConfig);
+

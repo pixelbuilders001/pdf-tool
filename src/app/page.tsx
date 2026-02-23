@@ -95,44 +95,7 @@ export default function Home() {
       </section>
 
       {/* Dark Section - Why Us */}
-      <section className="bg-[#05070a] text-white py-32">
-        <div className="container mx-auto px-4">
-          <div className="max-w-4xl mx-auto space-y-12">
-            <div className="space-y-6 text-center md:text-left">
-              <h2 className="text-4xl font-extrabold">Why Use PDF Toolkit Offline?</h2>
-              <p className="text-xl text-gray-400 leading-relaxed">
-                Most online editors upload your sensitive files. We don't. Our toolkit uses cutting-edge
-                browser technology to process everything on your computer, making it faster and 100% private.
-              </p>
-            </div>
 
-            <div className="grid grid-cols-1 md:grid-cols-2 gap-8">
-              <div className="p-8 rounded-2xl bg-white/5 border border-white/10 space-y-4">
-                <h3 className="text-xl font-bold flex items-center gap-2">
-                  <CheckCircle2 className="w-6 h-6 text-primary" />
-                  Is it really private?
-                </h3>
-                <p className="text-gray-400">
-                  Yes. We use standard libraries to handle processing on your local CPU.
-                  No data is sent to our servers, guaranteed.
-                </p>
-              </div>
-              <div className="p-8 rounded-2xl bg-white/5 border border-white/10 space-y-4">
-                <h3 className="text-xl font-bold flex items-center gap-2">
-                  <CheckCircle2 className="w-6 h-6 text-primary" />
-                  Fast Processing
-                </h3>
-                <p className="text-gray-400">
-                  Instant local execution saves time and bandwidth. No more waiting for uploads
-                  large PDFs or images.
-                </p>
-              </div>
-            </div>
-
-
-          </div>
-        </div>
-      </section>
     </div>
   );
 }

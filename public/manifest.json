@@ -1,21 +1,29 @@
 {
-  "name": "Hellofixo - Private & Offline Tools",
-  "short_name": "Hellofixo",
-  "description": "Fast, Private, Offline PDF Tools. Merge, Split, and Convert PDFs entirely in your browser.",
+  "name": "PDF Toolkit - Private & Offline",
+  "short_name": "PDF Toolkit",
+  "description": "100% client-side PDF and Image tools. Merge, split, compress, and convert files entirely in your browser.",
   "start_url": "/",
   "display": "standalone",
   "background_color": "#020617",
-  "theme_color": "#6366f1",
+  "theme_color": "#2563eb",
   "icons": [
     {
       "src": "/icons/icon-192x192.png",
       "sizes": "192x192",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
     },
     {
       "src": "/icons/icon-512x512.png",
       "sizes": "512x512",
-      "type": "image/png"
+      "type": "image/png",
+      "purpose": "any"
+    },
+    {
+      "src": "/icons/icon-192x192.png",
+      "sizes": "192x192",
+      "type": "image/png",
+      "purpose": "maskable"
     }
   ]
 }
